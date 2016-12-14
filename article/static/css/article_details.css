@@ -1,0 +1,42 @@
+.article-details .panel-heading h2{
+    text-align: center;
+}
+
+.article-details .panel-heading,
+.article-details .panel-footer,
+.comment .panel-default .panel-heading,
+.comment .panel-default .panel-footer{
+    background-color: white;
+}
+
+.article-details .panel-body{
+    word-wrap: break-word;
+}
+
+.comment{
+    list-style-type: none;
+}
+
+.subscribe a,
+.delete-comment a{
+    text-decoration: none;
+    color: black;
+}
+
+.subscribe:hover,
+.delete-comment a:hover{
+    cursor: pointer;
+    color: #AA3939;
+}
+
+.delete-comment{
+    float: right;
+}
+
+.comment .panel-default{
+    border-radius: 0;
+}
+
+.comment .panel-default .panel-footer{
+    border-top: none;
+}

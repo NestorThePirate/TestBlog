@@ -1,0 +1,94 @@
+html, body{
+    overflow-y: scroll;
+}
+
+.navbar-fixed-top{
+    background-color: #AA3939;
+    border: none;
+}
+
+body{
+    background-color: #EDEDED;
+    font-family: 'Garamond';
+}
+
+.user-sidebar .panel-heading a,
+.user-info a{
+    text-decoration: none;
+    color: black;
+}
+
+.user-sidebar .panel-heading a:hover,
+.user-info a:hover{
+    color: #AA3939;
+}
+
+.search-form input{
+
+}
+
+.main-content{
+    margin-top: 75px;
+}
+
+.user-sidebar,
+#article-list .panel-default{
+    border-radius: 0;
+}
+
+.user-sidebar .panel-heading,
+#article-list .panel-default .panel-heading{
+    background-color: white;
+}
+
+#article-list .article:hover{
+    cursor: pointer;
+}
+
+.sidebar-tag{
+    border: none;
+    border-radius: 0;
+    color: black;
+    background-color: #EDEDED;
+    margin-top: 3px;
+    margin-left: 0;
+}
+
+.sidebar-tag:hover,
+.sidebar-tag:active:focus,
+.sidebar-tag:visited,
+.sidebar-tag:focus {
+    background-color: #AA3939;
+}
+
+.article .panel-heading h3{
+    text-align: center;
+}
+
+.message p{
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+.message .panel-heading:hover{
+    background-color: #AA3939;
+    color: white;
+    cursor: pointer;
+}
+
+.message[data-status='True'] .panel-heading{
+    background-color: #EDEDED;
+}
+
+.message[data-status='False'] .panel-heading{
+    background-color: #AA3939;
+}
+
+.user-info .panel-heading{
+    background-color: white;
+}
+
+.user-info .panel-footer{
+    background-color: white;
+}

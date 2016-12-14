@@ -1,0 +1,78 @@
+{% extends 'main_page/main_page_carcass.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+        <div class="panel panel-default article-details" data-id="{{ article.get_article_rating_model_id }}"
+                                                         data-obj-id="{{ article.primary_key }}">
+            <div class="panel-heading">
+                <h2>{{ article.title }}</h2>
+            </div>
+            <div class="panel-body">
+                {{ article.text }}
+            </div>
+            <div class="panel-footer">
+                {{ article.created }}
+                <div class="likes-and-views">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> {{ article.get_hits }}
+                    <a href="/rate/{{ article.get_article_rating_model_id}}/like/">
+                        <span class="glyphicon glyphicon-thumbs-up like" data-grade="like"></span></a>
+                    <span class="total-likes">{{ article.get_likes }}</span>
+                    <a href="/rate/{{article.get_article_rating_model_id}}/dislike/">
+                        <span class="glyphicon glyphicon-thumbs-down like" data-grade="dislike"></span></a>
+                    <span class="total-dislikes">{{ article.get_dislikes }}</span>
+                </div>
+                <div class="subscribe">
+                {% if article in user.get_subscription_articles %}
+                    <a href ="/subscribe/{{ article.primary_key }}">Отписаться</a>
+                {% else %}
+                    <a href="/subscribe/{{ article.primary_key }}">Подписаться</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    <br>
+
+    <h3>Комментарии:</h3>
+{% load mptt_tags %}
+    <ul id="comments-section">
+        {% recursetree comments %}
+            <li class="comment" data-comment-id="{{ node.pk }}">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{ node.user }} {{ node.created }}
+                        <div class="delete-comment"><a href="/comment/delete/{{ node.pk }}"><span class="glyphicon glyphicon-remove"></span></a> </div>
+                    </div>
+                    <div class="panel-body">
+                        {{ node.text }}
+                    </div>
+                    <div class="panel-footer">
+                        <button type="submit" class="btn btn-primary btn-sm comment-answer">Ответить</button>
+                    </div>
+                </div>
+
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+    </ul>
+    {% if user.is_authenticated %}
+    <div id="comment-form">
+        <div id="errors-list" hidden="true">
+
+        </div>
+    <form action="" method="post" class="answer-form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary btn-sm answer-submit">Ответить</button>
+    </form>
+    </div>
+    {% else %}
+        <p>Войдите на свою учетную запись для оставления комментария</p>
+    {% endif %}
+{% endblock %}

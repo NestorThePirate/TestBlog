@@ -1,0 +1,41 @@
+{% extends 'main_page/main_page_carcass.html' %}
+
+{% block content %}
+    <a href="/send_message">Написать сообщение</a>
+    <h2 id="messages-counter">{{ message_obj.unchecked_messages }}/{{ message_obj.total_messages }}</h2>
+    {% for message in income_messages %}
+        <div class="panel panel-default message" data-status="{{ message.checked }}" data-id="{{ message.pk }}">
+
+            <div class="panel-heading">
+                <p><span class="glyphicon glyphicon-envelope"></span> {{ message }}</p>
+            </div>
+
+            <div class=" panel-body message-details" hidden="true">
+                {{ message.text }}
+                <br>
+                <a href="/send_message/{{ message.author_user }}">Ответить</a>
+            </div>
+        </div>
+        <span><a href="/delete_message/{{ message.pk }}" class="delete-message"><span class="glyphicon glyphicon-remove"></span></a> </span>
+    {% endfor %}
+    {% for message in income_messages %}
+        <div class="panel panel-default message" data-status="{{ message.checked }}" data-id="{{ message.pk }}">
+
+            <div class="panel-heading">
+                <p><span class="glyphicon glyphicon-envelope"></span> {{ message }}</p>
+            </div>
+
+            <div class=" panel-body message-details" hidden="true">
+                {{ message.text }}
+                <br>
+                <a href="/send_message/{{ message.author_user }}">Ответить</a>
+            </div>
+        </div>
+        <span><a href="/delete_message/{{ message.pk }}" class="delete-message"><span class="glyphicon glyphicon-remove"></span></a> </span>
+    {% endfor %}
+
+    <ul class="nav nav-tabs">
+  <li class="active"><a href="/{{ user.username }}/user_info/inc_messages_list">Входящие</a></li>
+  <li><a href="/{{ user.username }}/user_info/out_messages_list">Исходящие</a></li>
+</ul>
+{% endblock %}

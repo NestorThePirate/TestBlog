@@ -1,0 +1,31 @@
+{% extends 'main_page/main_page_carcass.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="row" id="article-list">
+        {% for article in object_list %}
+            <div class="panel panel-default article" data-pk="{{ article.primary_key }}">
+                <div class="panel-heading">
+                    <p><h3>{{ article.title }}</h3></p>
+                    {{ article.user }} {{ article.created }}
+                </div>
+                <div class="panel-body">
+                    {{ article.pretext }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"><span class="glyphicon glyphicon-menu-left button_left" aria-hidden="true"></span></a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"><span class="glyphicon glyphicon-menu-right button_right" aria-hidden="true"></span></a>
+            {% endif %}
+         </div>
+    {% else %}
+    {% endif %}
+
+{% endblock %}

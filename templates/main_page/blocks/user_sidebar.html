@@ -1,0 +1,44 @@
+<div class="panel panel-default user-sidebar">
+    <div class="panel-heading">
+        {% if user.is_authenticated %}
+            <h3><a href="/{{ user.username }}/user_info">{{ user.username }}</a></h3>
+            <a href="/{{ user.username }}/user_info/inc_messages_list"><span class="glyphicon glyphicon-envelope"></span></a> <span id="sidebar-messages">{{ user.get_unchecked_messages }}</span>
+            <span class="glyphicon glyphicon-thumbs-up"></span>{{ user.get_user_likes }} <span class="glyphicon glyphicon-thumbs-down"></span> {{ user.get_user_dislikes }}
+            <a href="/add_article"><span class="glyphicon glyphicon-pencil"></span> Написать пост</a>
+
+        {% else %}
+            <a href="/registration">Регистрация</a> <a href="/login">Войти</a>
+
+        {% endif %}
+    </div>
+</div>
+
+<div class="panel panel-default user-sidebar">
+    <div class="panel-heading">
+        <h4>Последние Комментарии:</h4>
+        {% for comment in RECENT_COMMENTS %}
+            <p><small><span class="glyphicon glyphicon-chevron-right"></span></small>
+                <a href="{{ comment.get_absolute_url }}">{{ comment.sidebar_info }}</a></p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="panel panel-default user-sidebar">
+    <div class="panel-heading">
+        <h4>Тэги:</h4>
+        {% for tag in TAG_LIST %}
+            <a href="/filter/tag/{{ tag }}"><button type="button" class="btn btn-primary btn-sm sidebar-tag">{{ tag }}</button></a>
+        {% endfor %}
+    </div>
+
+</div>
+
+<div class="panel panel-default user-sidebar">
+    <div class="panel-heading">
+        <h4>Популярные темы:</h4>
+        {% for article in POPULAR_ARTICLES %}
+            <p><small><span class="glyphicon glyphicon-chevron-right"></span></small>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a></p>
+        {% endfor %}
+    </div>
+</div>
